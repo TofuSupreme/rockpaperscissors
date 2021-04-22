@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Game!</title>
+</head>
+<body>
+    
+
+    <script>
+
+    function computerPlay() {
+        let choices = ["rock", "paper", "scissors"]
+        return choices[Math.floor(Math.random()*choices.length)]
+}
+
+    function playRounds(player, computer){
+    //if it is a tie
+    if(player === computer){
+        return "it is a tie"
+    }
+    
+    //if player chooses rock
+    if(player === "rock" && computer === "paper"){
+        ++computerScore
+        return "Oh no, you lose"
+        } else if (computer === "scissors"){
+            ++playerScore
+            return "You win!"
+    }
+    
+    //if player chooses paper
+    if(player === "paper" && computer === "scissors") {
+        ++computerScore
+        return "Oh no, you lose"
+        } else if (computer === "rock"){
+            ++playerScore
+            return "You win!"
+    }
+    
+    // if player chooses scissors
+    if(player === "scissors" && computer === "rock"){
+        ++computerScore
+        return "Oh no, you lose"
+    } else if (computer === "paper") {
+        ++playerScore
+        return "You win!"
+    }
+    else {
+    return "Oh no, there was an error!"
+    }
+
+    }
+// keep score
+
+let playerScore = 0;
+let computerScore = 0;
+
+function game(){
+    //play for 5 rounds
+    for(let i =0; i < 5; i++){
+        const player = prompt('What is it going to be? Rock, Paper, or Scissors?')
+        const computer = computerPlay()
+    
+        console.log(playRounds(player, computer))
+        console.log(playerScore, computerScore)
+    }
+    if(playerScore > computerScore){ 
+        return `You have won. ${playerScore} vs ${computerScore}`
+    } else if (playerScore < computerScore) {
+        return `You have lost. ${computerScore} vs ${playerScore}`
+    }
+    else {
+        return 'Okay, thats it. Five games are up!'
+    }
+    game()
+}
+    </script>
+</body>
+</html>
