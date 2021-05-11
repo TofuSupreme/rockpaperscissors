@@ -7,76 +7,152 @@
     <title>Rock Paper Scissors Game!</title>
 </head>
 <body>
-    
+    <h1 class="title">Now let us play Rock Paper Scissors</h1>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
 
+    <div class="scoreboard">
+        <p class="playerScore"> </p>
+        <p class="computerScore"> </p>
+
+    </div>
+</body>
     <script>
+
+        const playerTally = document.querySelector('.playerScore')
+        const computerTally = document.querySelector('.computerScore')
+        let computerScore = 0
+        let playerScore = 0
 
     function computerPlay() {
         let choices = ["rock", "paper", "scissors"]
         return choices[Math.floor(Math.random()*choices.length)]
 }
 
-    function playRounds(player, computer){
-    //if it is a tie
-    if(player === computer){
-        return "it is a tie"
-    }
-    
-    //if player chooses rock
-    if(player === "rock" && computer === "paper"){
-        ++computerScore
-        return "Oh no, you lose"
-        } else if (computer === "scissors"){
-            ++playerScore
-            return "You win!"
-    }
-    
-    //if player chooses paper
-    if(player === "paper" && computer === "scissors") {
-        ++computerScore
-        return "Oh no, you lose"
-        } else if (computer === "rock"){
-            ++playerScore
-            return "You win!"
-    }
-    
-    // if player chooses scissors
-    if(player === "scissors" && computer === "rock"){
-        ++computerScore
-        return "Oh no, you lose"
-    } else if (computer === "paper") {
-        ++playerScore
-        return "You win!"
-    }
-    else {
-    return "Oh no, there was an error!"
+    function playRound(player, computer) {
+        switch(player + computer) {
+            case 'rockrock':
+                case 'paperpaper':
+                    case 'scissorsscissors':
+                    return playerScore, computerScore
+                    break;
+            case 'rockscissors':
+                case 'paperrock':
+                    case 'scissorspaper':
+                        return playerScore++
+                        break;
+            case 'rockpaper':
+                case 'paperscissors': 
+                    case 'scissorsrock': 
+                    return computerScore++
+                    break
+        }
     }
 
-    }
+
+
+    // function playRounds(player, computer){
+    // //if it is a tie
+    // if(player === computer){
+    //     return "it is a tie"
+    // }
+
+    // //if player chooses rock
+    // if(player === 'rock' && computer === 'paper'){
+    //     computerScore+=1
+    //     } else if (computer === "scissors"){
+    //         playerScore+=1
+    // } 
+
+    // //if player chooses paper
+    // if (player === 'paper' && computer === 'scissors') {
+    //         computerScore+=1
+    //     } else if (computer === 'rock') {
+    //         playerScore+=1 
+    // }
+    
+    // // if player chooses scissors
+    // if (player === 'scissors' && computer === "rock"){
+    //     computerScore+=1
+    //     return "Oh no, you lose"
+    // } else if (computer === "paper") {
+    //     // playerScore+=1
+    //     return "You win!"
+    // }
+    // else {
+    // return "Oh no, there was an error!"
+    // }
+    //     console.log(playerScore, computerScore)
+    // }
 // keep score
 
-let playerScore = 0;
-let computerScore = 0;
 
-function game(){
-    //play for 5 rounds
-    for(let i =0; i < 5; i++){
-        const player = prompt('What is it going to be? Rock, Paper, or Scissors?')
-        const computer = computerPlay()
+// function game(){
+//     //play for 5 rounds
+//     for(let i =0; i < 5; i++){
+//         const player = buttons
+//         const computer = computerPlay()
     
-        console.log(playRounds(player, computer))
-        console.log(playerScore, computerScore)
-    }
-    if(playerScore > computerScore){ 
-        return `You have won. ${playerScore} vs ${computerScore}`
-    } else if (playerScore < computerScore) {
-        return `You have lost. ${computerScore} vs ${playerScore}`
-    }
-    else {
-        return 'Okay, thats it. Five games are up!'
-    }
-    game()
-}
+//         console.log(playRounds(player, computer))
+//         console.log(playerScore, computerScore)
+//     }
+//     if(playerScore > computerScore){ 
+//         return `You have won. ${playerScore} vs ${computerScore}`
+//     } else if (playerScore < computerScore) {
+//         return `You have lost. ${computerScore} vs ${playerScore}`
+//     }
+//     else {
+//         return 'Okay, thats it. Five games are up!'
+//     }
+//     game()
+// }
+
+    const buttons = document.querySelectorAll('button')
+    buttons.forEach(button => {
+        button.addEventListener('click', event =>{
+            playerSelection = button.id
+            computerSelection = computerPlay()
+            results = playRound(playerSelection,computerSelection)
+
+            
+            if (computerSelection > playerSelection){
+            console.log('Player Wins!')
+            playerTally.textContent = 'Yes! I have won! My score is now: ' + playerScore
+            computerTally.textContent = 'This cannot be! How can this happen!? My score is now: ' + computerScore
+            
+        } else if(computerSelection < playerSelection) {
+            console.log('Computer Wins!')
+            playerTally.textContent = 'Oh man! I lost! My score is now: ' + playerScore
+            computerTally.textContent = 'This is a favorable event. I have won. My score is now: ' + computerScore
+        }
+        else {
+                console.log('It is a Tie! No one wins!')
+                    playerTally.textContent = 'Drats! I did not win! My score is now: ' + playerScore
+                    computerTally.textContent = 'This is quite an unfavorable turn of events. My score is now: ' + computerScore
+            }
+
+            console.log(playerSelection,computerSelection)
+            console.log(playerScore,computerScore)
+            // scoreKeeper(results)
+        })
+    })
+
+    //to keep the score and have display changes per round
+    // const scoreBoard = document.querySelector('#scoreBoard')
+
+    // function scoreKeeper(results){
+    //     if(results === 3) {
+    //         playerScore++
+    //         scoreBoard.textContent = 'Player Score is :' + playerScore + 'and ' + 'The Computer Score is :' + computerScore
+    //     } 
+    // }
+
+    //to reset the game
+    
+    TODO: 'Create a function that keeps score'
+    TODO: 'Have that score display in a DIV'
+    TODO: 'Create a reset button'
     </script>
 </body>
 </html>
